@@ -1,0 +1,30 @@
+Hey, so.  List of stuff.
+
+Product list/product search
+Individual product page
+  Remove
+  Rate
+  Edit
+  Whatever
+Add products
+
+Create a products class
+  Description
+  Pictures
+  Ratings
+  Reviews
+  Discussion board
+  Owner
+  Category
+  Docs
+  Price
+  
+Populate with sample products
+  5 Categories
+  3 products each
+  
+Compare and Contrast products
+  Select products to compare
+
+Users
+  Online?
