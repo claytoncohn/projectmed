@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
   devise_for :users
   resources :users
-
+resources :favorite_products, only: [:create, :destroy]
   resources :conversations do
     resources :messages
   end
