@@ -27,6 +27,7 @@ gem 'cancancan'
 gem "administrate-field-image"
 gem 'rolify'
 gem "paperclip", "~> 5.0.0.beta1"
+gem "ajaxful_rating"
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil

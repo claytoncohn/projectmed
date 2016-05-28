@@ -28,5 +28,3 @@ Compare and Contrast products
 
 Users
   Online?
-
-***TEST PUSH TO GIT***
