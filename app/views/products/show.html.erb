@@ -45,16 +45,36 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
-  <%= @product.rating %>
+  <strong>Overall Rating:</strong> 
+  <%= rating_for @product, "product_rating", disable_after_rate: true, imdb_avg: true %>
 </p>
 
+<p>
+  <% if current_user %>
+    <strong>My Rating:</strong> 
+    <%= rating_for_user @product, current_user, "product_rating" %>
+  <% end %>
+</p>
 
+<!-- <p>
+  <strong>Rating:</strong>
+  <%= @product.rating %>
+  <br>
+</p> -->
+<div class="row">
+  <div class="small-2 large-4 columns">
+      <br>
+      <br>
+  </div>
+</div>
+
+<!-- 
 <%- unless current_user.favorite_products.exists?(id: @product.id) -%>
 <%= link_to 'Add to favorites', favorite_products_path(product_id: @product), method: :create %>
 <%- else -%>
 <%= link_to 'Remove from favorites', favorite_product_path(@product), method: :delete %>
 <%- end -%>
-
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+-->
+
