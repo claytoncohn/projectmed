@@ -1,0 +1,44 @@
+<% if user_signed_in? %>
+<% content_for :title do %>Favorites<% end %>
+<h3>Favorites</h3>
+
+<table>
+  <thead>
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Picture</th>
+        <th>Category</th>
+        <th>Specs</th>
+        <th>Price</th>
+        <th colspan="3"></th>
+      </tr>
+  </thead>
+  <tbody>
+<% @favorite = current_user.favorite_products %>
+<% @favorite.each do |favorite| %>
+  <%  par =  favorite.id %>
+  <% @products = Product.search(par) %>
+     <% @products.each do |product| %>
+       <tr>
+         <td> <%if product.image? %>
+            <%= image_tag product.image.url(:thumb) %>
+            <%end%></td>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.picture %></td>
+          <td><%= product.category %></td>
+          <td><%= product.specs %></td>
+          <td><%= product.price %></td>
+          <td><%= link_to 'Show', product %></td>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         
+      </tr>
+      <%end%>
+    <%end%>
+</tbody>
+</table>
+<%end%>
+</p>
