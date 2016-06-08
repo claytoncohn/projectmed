@@ -7,11 +7,15 @@ class ProductsController < ApplicationController
    
       
     @products = Product.all
-    if params[:search]
-    @products = Product.search(params[:search]).order("name DESC")
-  else
-    @products = Product.all.order("name DESC")
-  end
+    if params[:compare]
+    	@products= Product.comp(params[:compare]).order("name DESC")
+    else
+    	if params[:search]
+   		 @products = Product.search(params[:search]).order("name DESC")
+  	else
+    		@products = Product.all.order("name DESC")
+  	end
+    end
   end
 
   # GET /products/1

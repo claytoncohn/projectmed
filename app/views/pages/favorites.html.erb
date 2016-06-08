@@ -2,8 +2,10 @@
 <h3>Favorites</h3>
 
 <% if user_signed_in? %>
-
+  <%=form_tag(products_path, method: :get)%>
+  <%=submit_tag "Compare", :name => nil, :class=>"btn btn-info"%>
 <% @favorite = current_user.favorite_products %>
+<%if @favorite.size <= 3%>
 <% @favorite.each_slice(3) do |favorite| %>
 <div class="row">
 <% favorite.each do |fav|%>
@@ -17,8 +19,9 @@
             <%=link_to image_tag(products.image.url(:thumb)), products %></br>
           <%end%>
           <%= products.name %></br>
-          <%='$ '%><%= products.price %></br>
-          <%='Select'%> <%=check_box_tag 'compBox', products.id%>  </br>
+          <%='Description: '%><%= products.description%></br>
+          <%='Price $ '%><%= products.price %></br>
+          <%='Select'%> <%=check_box_tag 'compare[]', products.id%>  </br>
           <%= rating_for products, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
           <%= link_to 'Show', products %>
           <%= link_to 'Edit', edit_product_path(products) %>
@@ -27,5 +30,31 @@
  <% end %>
    <%end%>
 </div>
+<%end%>
+<%else%>
+<% @favorite.each_slice(3) do |favorite| %>
+<div class="row">
+<% favorite.each do |fav|%>
+ <%  par =  fav.id %>
+ <% @products = Product.search(par) %>
+ 
+ <% @products.each do |products| %>
+ 
+        <div class="col-lg-2" style="border:thin solid black">
+          <%if products.image? %>
+            <%=link_to image_tag(products.image.url(:thumb)), products %></br>
+          <%end%>
+          <%= products.name %></br>
+          <%='Price $ '%><%= products.price %></br>
+          <%='Select'%> <%=check_box_tag 'compare[]', products.id%>  </br>
+          <%= rating_for products, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
+          <%= link_to 'Show', products %>
+          <%= link_to 'Edit', edit_product_path(products) %>
+         <%= link_to 'Destroy', products, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+ <% end %>
+   <%end%>
+</div>
+<%end%>
 <%end%>
 <%end%>

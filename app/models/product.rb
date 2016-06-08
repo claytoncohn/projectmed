@@ -8,4 +8,7 @@ has_attached_file :image, styles: {carousel:"800x300#", main: "800x300^", min: "
   def self.search(search)
     where("name LIKE ? OR description LIKE ? OR category LIKE ? OR id LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
   end
+  def self.comp(compare)
+    where(id: compare)
+  end
 end
