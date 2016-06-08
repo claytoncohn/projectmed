@@ -2,26 +2,51 @@
 
 <h1>Listing Products</h1>
 <% if @products.present? %>
-   
-   <% @products.each_slice(3) do |products| %>
-     <div class="row">
+      <%=form_tag(products_path, method: :get)%>
+      <%=submit_tag "Compare", :name => nil, :class=>"btn btn-info"%>
+      <%if @products.size <= 3 %>
+           <% @products.each_slice(3) do |products| %>
+            <div class="row">
+           
+                 <% products.each do |product| %>
+                 <div class="col-lg-2" style="border:thin solid black">
+                 <%if product.image? %>
+                     <%=link_to image_tag(product.image.url(:thumb)), product %></br>
+                 <%end%>
+                 <%= product.name %></br>
+                 <%='Description: '%><%= product.description%></br>
+                 <%='Price $ '%><%= product.price %></br>
+                 <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
+                 <%= rating_for product, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
+                 <%= link_to 'Show', product %>
+                 <%= link_to 'Edit', edit_product_path(product) %>
+                 <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+                 </div>
+                 <%end%>
+            </div>
+           <%end%>
+           
+      <%else%>
+           <% @products.each_slice(3) do |products| %>
+            <div class="row">
        
-       <% products.each do |product| %>
-         <div class="col-lg-2" style="border:thin solid black">
-           <%if product.image? %>
-             <%=link_to image_tag(product.image.url(:thumb)), product %></br>
-             <%end%>
-           <%= product.name %></br>
-           <%='$ '%><%= product.price %></br>
-           <%='Select'%> <%=check_box_tag 'compBox', product.id%>  </br>
-           <%= link_to 'Show', product %>
-           <%= link_to 'Edit', edit_product_path(product) %>
-          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-         </div>
-       <% end %>
-    </div>
+               <% products.each do |product| %>
+                   <div class="col-lg-2" style="border:thin solid black">
+                   <%if product.image? %>
+                   <%=link_to image_tag(product.image.url(:thumb)), product %></br>
+                   <%end%>
+                   <%= product.name %></br>
+                   <%='$ '%><%= product.price %></br>
+                   <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
+                   <%= rating_for product, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
+                   <%= link_to 'Show', product %>
+                   <%= link_to 'Edit', edit_product_path(product) %>
+                   <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+                   </div>
+                 <% end %>
+            </div>
    <%end%>
-  
+ <%end%>
   <br>
 <%else%>  
   <h3>There are no products containing the term <%= params[:search] %>.</h3>
