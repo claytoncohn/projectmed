@@ -9,7 +9,7 @@
             <div class="row">
            
                  <% products.each do |product| %>
-                 <div class="col-lg-2" style="border:thin solid black">
+                 <div class="col-lg-2 product-container">
                  <%if product.image? %>
                      <%=link_to image_tag(product.image.url(:thumb)), product %></br>
                  <%end%>
@@ -31,7 +31,7 @@
             <div class="row">
        
                <% products.each do |product| %>
-                   <div class="col-lg-2" style="border:thin solid black">
+                   <div class="col-lg-2 product-container">
                    <%if product.image? %>
                    <%=link_to image_tag(product.image.url(:thumb)), product %></br>
                    <%end%>
