@@ -19,7 +19,7 @@
             <%=link_to image_tag(products.image.url(:thumb)), products %></br>
           <%end%>
           <%= products.name %></br>
-          <%='Description: '%><%= products.description%></br>
+          <!-- <%='Description: '%><%= products.description%></br> -->
           <%='Price $ '%><%= products.price %></br>
           <%='Select'%> <%=check_box_tag 'compare[]', products.id%>  </br>
           <%= rating_for products, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
