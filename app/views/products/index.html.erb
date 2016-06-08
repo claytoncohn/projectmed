@@ -51,10 +51,10 @@
 
    <%end%>
  <%end%>
-    <% if user_signed_in? %>
-    <%= link_to 'New Product', new_product_path, :class=>"btn btn-success", :style=>'color:#FFFFFF;' %>
-    <% end %>
   <br>
 <%else%>  
   <h3>There are no products containing the term <%= params[:search] %>.</h3>
+<% end %>
+<% if user_signed_in? %>
+  <%= link_to 'New Product', new_product_path, :class=>"btn btn-success", :style=>'color:#FFFFFF;' %>
 <% end %>
