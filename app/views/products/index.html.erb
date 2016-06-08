@@ -19,9 +19,11 @@
                  <%='Price $ '%><%= product.price %></br>
                  <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
                  <%= rating_for product, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
-                 <%= link_to 'Show', product %>
-                 <%= link_to 'Edit', edit_product_path(product) %>
-                 <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+                 <% if user_signed_in? %>
+                 <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn-sm btn-danger", :style=>'color:#FFFFFF;' %>
+                   <%= link_to 'Edit', edit_product_path(product), :class=>"btn-sm btn-default" %>
+                   <%= link_to 'Show', product, :class=>"btn-sm btn-default"%>
+                 <% end %>
                  </div>
                  <%end%>
             </div>
@@ -37,21 +39,21 @@
                       <%= product.name %></br>
                       <%='$ '%><%= product.price %></br>
                       <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
-                      <%= rating_for product, "product_rating", disable_after_rate: true,    imdb_avg: true %> </br>
-                   <%= link_to 'Show', product %>
-                   <%= link_to 'Edit', edit_product_path(product) %>
-                   <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%= rating_for product, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
+                      <% if user_signed_in? %>
+                   <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn-sm btn-danger x", :style=>'color:#FFFFFF;' %>
+                   <%= link_to 'Edit', edit_product_path(product), :class=>"btn-sm btn-default" %>
+                   <%= link_to 'Show', product, :class=>"btn-sm btn-default"%>
+                   <% end %>
                    </div>
                  <% end %>
             </div>
 
    <%end%>
-   <br>
+ <%end%>
     <% if user_signed_in? %>
     <%= link_to 'New Product', new_product_path, :class=>"btn btn-success", :style=>'color:#FFFFFF;' %>
     <% end %>
- <%end%>
-
   <br>
 <%else%>  
   <h3>There are no products containing the term <%= params[:search] %>.</h3>
