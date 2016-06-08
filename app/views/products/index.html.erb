@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Products</h1>
+<h1>Product Listing</h1>
+
 <% if @products.present? %>
       <%=form_tag(products_path, method: :get)%>
       <%=submit_tag "Compare", :name => nil, :class=>"btn btn-info"%>
@@ -25,30 +26,33 @@
                  <%end%>
             </div>
            <%end%>
-           
       <%else%>
            <% @products.each_slice(3) do |products| %>
             <div class="row">
-       
                <% products.each do |product| %>
                    <div class="col-lg-2 product-container">
-                   <%if product.image? %>
-                   <%=link_to image_tag(product.image.url(:thumb)), product %></br>
-                   <%end%>
-                   <%= product.name %></br>
-                   <%='$ '%><%= product.price %></br>
-                   <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
-                   <%= rating_for product, "product_rating", disable_after_rate: true, imdb_avg: true %> </br>
+                      <%if product.image? %>
+                      <%=link_to image_tag(product.image.url(:thumb)), product %></br>
+                      <%end%>
+                      <%= product.name %></br>
+                      <%='$ '%><%= product.price %></br>
+                      <%='Select'%> <%=check_box_tag "compare[]", product.id%>  </br>
+                      <%= rating_for product, "product_rating", disable_after_rate: true,    imdb_avg: true %> </br>
                    <%= link_to 'Show', product %>
                    <%= link_to 'Edit', edit_product_path(product) %>
                    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
                    </div>
                  <% end %>
             </div>
+
    <%end%>
+   <br>
+    <% if user_signed_in? %>
+    <%= link_to 'New Product', new_product_path, :class=>"btn btn-success", :style=>'color:#FFFFFF;' %>
+    <% end %>
  <%end%>
+
   <br>
 <%else%>  
   <h3>There are no products containing the term <%= params[:search] %>.</h3>
 <% end %>
-<%= link_to 'New Product', new_product_path %>
