@@ -6,6 +6,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # Paperclip.options[:command_path] = "/usr/local/bin/"
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -28,8 +30,8 @@ Rails.application.configure do
   config.assets.debug = true
 
   ActionMailer::Base.smtp_settings = {
-  :user_name => 'projectmed',
-  :password => 'mypass123',
+  :user_name => 'claytoncohn',
+  :password => 'mypass12345',
   :domain => 'localhost:3000',
   :address => 'smtp.sendgrid.net',
   :port => 2525,
